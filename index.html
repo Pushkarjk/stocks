@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Team Stocks</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>    
+    <!-- <script type="module" src="map.js"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">  
+    <style>
+      h1 {
+        color: #4d5a5f;
+        font-family: arial, sans-serif;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 0px;
+        margin-bottom: 1px;
+        }
+        h2 {
+        color: #4d5a5f;
+        font-family: arial, sans-serif;
+        font-size: 18px;
+        margin-top: 0px;
+        margin-bottom: 1px;
+        }
+    </style>
+  </head>
+  <body style="background-color: rgb(226, 226, 226);">
+    <div class="container" style="margin-top: 50px;">
+      <div id="treemap">
+          <h1>Interactive Data Visualisation Final Project - Team Stocks</h1>
+          <h1> Sectors (S&P 500)</h1>
+          <br>
+          <h2>Click a sector to know about the Companies fall under the sector and the Market Capital</h2>
+          <br>
+      </div>
+      <br>
+      <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModalScrollable2">Click to compare the Price-fall of sectors by year</button>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Market Capital</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="bargraph">
+              <center>
+                <p id="sectorName"></p>
+              </center>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-xl" id="exampleModalScrollable2" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Price-fall/gain by year</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="bargraph">
+              <div style="width: 100%; display: table;">
+                <div style="display: table-row">
+                    <div style="width: 60px; text-align: center; display: table-cell;"> 
+                      
+                      <table style="width:10%; height:20%">
+                        <tr>
+                          <th>Sectors</th>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#e41a1c;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Consumer Discretionary</td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#377eb8;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Information Technology</td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#4daf4a;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>
+                            Health Care
+                            </td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#984ea3;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Financials</td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#ff7f00;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Real Estate</td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#ffff33;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Industrials</td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#a65628;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Materials</td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#f781bf;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Consumer Staples</td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#999999;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Energy</td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#377eb8;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Utilities</td>
+                        </tr>
+                        <tr>
+                          <td><svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#cc37c0;stroke-width:3;stroke:rgb(0,0,0)" />
+                          </svg></td>
+                          <td>Tcom</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div style="display: table-cell;"> <svg id="linechart" width="560" height="960"></svg> </div>
+                </div>
+            </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <script src="sector.js"></script>
+  <script src="map.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="bargraph.js"></script>
+  <script src="linechart.js"></script>
+  <script src="OneCatSev.js"></script>
+  <script>
+    // import { bargraph } from './bargraph.js';
+    var sector1 = d3.csvParse(sector,
+        (d) => {return d;} );
+    console.log(sector1)
+    mp(sector1)
+
+    var oneCat = d3.csvParse(sector,
+                                    (d) => {return d;} );   
+
+    var margin = {top: 10, right: 100, bottom: 30, left: 90},
+      width = 800,
+      height = 500;
+
+    var svg5 = d3.select("#linechart")
+    .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+      linechart(svg5, oneCat)    
+
+
+  </script>
+  
+  </body>
+
+</html>

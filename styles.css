@@ -1,0 +1,27 @@
+body {
+  margin: 0px;
+  overflow: scroll;
+}
+
+#sectorName {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  color: black;
+  text-decoration: underline;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: space-around;
+}
+
+#treemap > h1 {
+  text-align: center;
+}
+
+#treemap > h2 {
+  text-align: center;
+}
