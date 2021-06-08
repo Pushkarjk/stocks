@@ -1,7 +1,7 @@
 var mp =function(data){
     var margin = { top: 0, right: 0, bottom: 0, left: 0 },
-        width = 1000 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 700 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
     let sectorWiseData = {};
     let sectorDataWhole = {};
@@ -11,6 +11,13 @@ var mp =function(data){
     dispatch.on('sectorClicked', function (sector) {
         bargraph(d3, sectorWiseData[sector], sector);
     })
+    var hover = function(sectorName){
+        linechart(svg5, oneCat, sectorName)    
+    }
+    var release = function(){
+        linechart(svg5, [], '')
+    }
+    
     sectorDataWhole = data;
 
         sectorWiseData = data.reduce((sectorData, currentRow) => {
@@ -66,12 +73,15 @@ var mp =function(data){
                     .style("fill", "#81a2d4")
                     .style("cursor", "pointer")
                     .attr("stroke-width", 1);
+
+                hover(d.id);
             })
             .on("mouseleave", function (d) {
                 d3.select(this).transition()
                     .duration(200)
                     .style("fill", "#3d4c63")
                     .attr("stroke", "black")
+                    release(d.id);
             })
             .on('click', (e) => {
                 dispatch._.sectorClicked[0].value(e.id);

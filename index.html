@@ -29,18 +29,20 @@
     </style>
   </head>
   <body style="background-color: rgb(226, 226, 226);">
-    <div class="container" style="margin-top: 50px;">
-      <div id="treemap">
+    <div class="container" style="margin-top: 90px; max-width: 2100px !important;">
+      <div id="treemap" style="float:left">
           <h1>Interactive Data Visualisation Final Project - Team Stocks</h1>
           <h1> Sectors (S&P 500)</h1>
           <br>
           <h2>Click a sector to know about the Companies fall under the sector and the Market Capital</h2>
           <br>
+          <svg id="linechart" style="float:right" width="560" height="960"></svg> 
+      </div>
+      <div>
+        
       </div>
       <br>
-      <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModalScrollable2">Click to compare the Price-fall of sectors by year</button>
     </div>
-    
     <!-- Modal -->
     <div class="modal fade bd-example-modal-lg" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
@@ -65,7 +67,7 @@
       </div>
     </div>
 
-    <div class="modal fade bd-example-modal-xl" id="exampleModalScrollable2" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle1" aria-hidden="true">
+    <!-- <div class="modal fade bd-example-modal-xl" id="exampleModalScrollable2" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -154,7 +156,7 @@
                         </tr>
                       </table>
                     </div>
-                    <div style="display: table-cell;"> <svg id="linechart" width="560" height="960"></svg> </div>
+                    
                 </div>
             </div>
             </div>
@@ -164,7 +166,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
   <script src="sector.js"></script>
   <script src="map.js"></script>
@@ -176,15 +178,14 @@
     // import { bargraph } from './bargraph.js';
     var sector1 = d3.csvParse(sector,
         (d) => {return d;} );
-    console.log(sector1)
     mp(sector1)
 
     var oneCat = d3.csvParse(sector,
                                     (d) => {return d;} );   
 
     var margin = {top: 10, right: 100, bottom: 30, left: 90},
-      width = 800,
-      height = 500;
+      width = 450,
+      height = 300;
 
     var svg5 = d3.select("#linechart")
     .attr("width", width + margin.left + margin.right)
@@ -192,9 +193,11 @@
       .append("g")
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
-
-      linechart(svg5, oneCat)    
-
+      
+      
+      
+      linechart(svg5, oneCat, '')
+              
 
   </script>
   

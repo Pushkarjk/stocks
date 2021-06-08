@@ -1,6 +1,6 @@
 var bargraph = function (d3, data = [], sector) {
 
-
+    data.sort(function(a,b) { return +a.market_cap - +b.market_cap })
 
     let svgElement = document.getElementById('lineGr');
     let sectorName = document.getElementById("sectorName").innerHTML = sector;
